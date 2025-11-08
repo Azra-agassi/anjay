@@ -1,77 +1,113 @@
 #include <iostream>
+#include <cmath> 
 using namespace std;
-//arvin bau mixue
-float pi = 3.14;
-int t = 0;
-int r = 0;
-float hasil1 = 0;
-int pilih;
-char ulang;
-int alas = 0;
-int tinggi = 0;
-int a,b,c = 0;
-int lebar = 0;
-int panjang = 0;
-void menu () {
-	cout << "Selamat datang di menu arvin" << endl;
-	cout << "Volume tabung" << endl;
-	cout << "Volume kerucut" << endl;
-	cout << "Volume dan luas segitiga" << endl;
-	cout << "Volume dan luas persegi panjang" << endl;
-}
-void pilihan () {
-do {
-		cout << "pilih pin ";
-		cin >> pilih;
-		switch (pilih) {
-				case 1:
-				cout << "Masukan nilai r: ";
-				cin >> r;
-				cout << "Masukan nilai t: ";
-				cin >> t;
-				hasil1 = pi * r * r * t;
-				cout << hasil1;
-				break;
-				case 2:
-				cout << "Masukan nilai r: ";
-				cin >> r;
-				cout << "Masukan nilai t: ";
-				cin >> t;
-				hasil1 = 1.0/3.0 * pi * r * r * t;
-				cout << hasil1;
-				break;
-				case 3:
-				cout << "masukan alas dan tinggi" << endl;
-				cout << "Masukan alas: ";
-				cin >> alas;
-				cout << "Masukan : ";
-				cin >> tinggi;
-				cout << "masukan sisi A " << endl;
-				cin >> a;
-				cout << "masukan sisi B " << endl;
-				cin >> b;
-				cout << "masukan sisi C " << endl;
-				cin >> c;
-				cout << "keliling segitiga " << a + b + c << endl;
-				cout << "Luas segitiga " << 0.5 * (alas * tinggi);
-				break;
-				case 4:
-                cout << "Masukkan panjang: ";
-                cin >> panjang;
-                cout << "Masukkan lebar: ";
-                cin >> lebar;
-                cout << "Luas Persegi Panjang = " << (panjang * lebar) << endl;
-                cout << "Keliling Persegi Panjang = " << (2 * (panjang + lebar)) << endl;
-                break;
-				
-}
-	cout << endl;
-	cout << "ulang: ";
-	cin >> ulang;
-}	while (ulang != 'n');		
-}
+
 int main() {
-	menu();
-	pilihan();
-	return 0;
+	string nama;
+	int umur;
+	string member;
+	int saldo;
+	int cash;
+	int opsi;
+	int barang1, barang2, barang3, barang4, totalbarang;
+	char opsi1;
+	
+	cout << "Masukan nama : ";
+	cin >> nama;
+	cout << "Masukan umur : ";
+	cin >> umur;
+	cout << "Masukan member : ";
+	cin >> member;
+	cout << "Masukan saldo : ";
+	cin >> saldo;
+	cout << "Masukan cash : ";
+	cin >> cash;
+	
+	do {
+		cout << "Sikat Gigi dengan Harga 10000" << endl;
+		cout << "Pasta Gigi dengan Harga 12000" << endl;
+		cout << "Sabun Mandi dengan Harga 20000" << endl;
+		cout << "Shampoo Motor dengan Harga 25000" << endl;
+		cout << "Menu Cek uang (1)" << endl;
+		cout << "Beli barang (2)" << endl;
+		cout << "Menu keluar (3)" << endl;
+		cin >> opsi;
+		
+		switch (opsi) {
+			case 1:
+				cout << "Jumlah saldo anda " << saldo << endl;
+				cout << "Jumlah cash anda " << cash << endl;
+				break;
+				
+			case 2:
+				cout << "Mau beli apa cuks" << endl;
+				cout << "Sikat Gigi dengan Harga 10000 (mau beli berapa) ";
+				cin >> barang1;
+				cout << "Pasta Gigi dengan Harga 12000 (mau beli berapa) ";
+				cin >> barang2;
+				cout << "Sabun Mandi dengan Harga 20000 (mau beli berapa) ";
+				cin >> barang3;
+				cout << "Shampoo Motor dengan Harga 25000 (mau beli berapa) ";
+				cin >> barang4;
+				
+				barang1 = barang1 * 10000;
+				barang2 = barang2 * 12000;
+				barang3 = barang3 * 20000;
+				barang4 = barang4 * 25000;
+				totalbarang = barang1 + barang2 + barang3 + barang4;
+				cout << "Total harga adalah " << totalbarang << endl;
+				
+				// diskon member
+				if (member == "immortal") {
+					cout << "Karena member kamu " << member << " harga diskon 15%" << endl;
+					cout << "Sebelum diskon " << totalbarang << endl;
+					totalbarang = totalbarang * 0.85;
+					cout << "Setelah diskon " << totalbarang << endl;
+				}
+				else if (member == "glory") {
+					cout << "Karena member kamu " << member << " harga diskon 10%" << endl;
+					cout << "Sebelum diskon " << totalbarang << endl;
+					totalbarang = totalbarang * 0.90;
+					cout << "Setelah diskon " << totalbarang << endl;
+				}
+				else if (member == "honor") {
+					cout << "Karena member kamu " << member << " harga diskon 5%" << endl;
+					cout << "Sebelum diskon " << totalbarang << endl;
+					totalbarang = totalbarang * 0.95;
+					cout << "Setelah diskon " << totalbarang << endl;
+				}
+
+	
+				totalbarang = totalbarang - saldo;
+
+				if (totalbarang <= 0) {
+					saldo = saldo + totalbarang; 
+					cout << "Terima kasih sudah belanja!" << endl;
+					cout << "Sisa saldo anda: " << saldo << endl;
+				}
+				else {
+					saldo = 0; 
+					totalbarang = totalbarang - cash;
+
+					if (totalbarang <= 0) {
+						cout << "Terima kasih sudah belanja!" << endl;
+						cout << "Sisa saldo anda: 0" << endl;
+						cash = cash + totalbarang; 
+						cout << "Sisa cash anda: " << cash << endl;
+					}
+					else {
+						cout << "Duit kurang cuks anjay!" << endl;
+					}
+				}
+				break;
+				
+			case 3:
+				return 0;
+		}
+		
+		cout << endl;
+		cout << "Balik ke menu? (y/n) = ";
+		cin >> opsi1;
+		
+	} while (opsi1 != 'n');		
 }
